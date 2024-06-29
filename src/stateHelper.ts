@@ -1,10 +1,11 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
+import { MyContext } from "./mycontext";
 
 let fetching = false;
 
 export const useStateHelper = () => {
-  const [state, setState] = useState<any>({});
+  const {state, setState} = useContext(MyContext);
 
   const changeState = (obj: any) => {
     console.log(obj);
@@ -13,6 +14,10 @@ export const useStateHelper = () => {
   };
 
   const fetchData = async () => {
+    if (Array.isArray(state?.data) && state?.data?.length > 0) {
+      return;
+    }
+
     if (fetching) {
       return;
     }
