@@ -41,5 +41,5 @@ export const useStateHelper = () => {
     fetchData();
   }, []);
 
-  return state
+  return [state, setState]
 }
